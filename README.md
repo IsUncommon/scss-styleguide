@@ -306,6 +306,14 @@ Modules sit inside layout components or inside other modules.
 * Should be easy to customize. Modules will be customized based on requirements on different pages, so should be written with low specificity.
 * Modules generally don't have a width specified, since they are designed to sit within a layout.
 
+### <a name="organizing-states">State Rules</a>
+
+Pseudo classes and state rules (:hover, :focus, .is-active, .is-hidden) should not be pulled out into a seperate stylesheet. They should be included in the base or module directly, and should be nested under the relevant selector.
+
+### <a name="organizing-pages">Pages (/)</a>
+
+Any style that only applies to a specific page or section and will not be reused, should be included in that specific page's stylesheet.
+
 
 <a name="thanks">Thanks</a>
 ======
