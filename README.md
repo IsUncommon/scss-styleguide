@@ -13,7 +13,8 @@ Table of Contents
 
 1. [General Principles](#general)
 2. [Formatting](#formatting)
-3. [Thanks](#thanks)
+3. [Structure](#structure)
+4. [Thanks](#thanks)
 
 
 
@@ -174,7 +175,7 @@ ul {
 Classes, pseduo-classes, and other modifiers should nest inside their selector to maintain readability. The same rules with a line break above apply to these modifiers. Pseduo-class modifiers should go as close to their parent selector as possible. This allows developers to quick see any hover or other states without having to find them later in the file. Class modifiers should also go near their selector whenever possible.  
 
 
-```sass
+```scss
 // bad
 h1.green {
   color: #0085e3
@@ -191,6 +192,46 @@ h1 {
   &.green { color: #0085e3; }
 }
 ```
+
+<a name="structure">Structure</a>
+======
+
+Style rules are organized into these basic categories:
+
+* Base: defaults. 
+* Layout: basic grid layout, site/application layout
+* Module: reusable components that will be used in multiple locations.
+* State: describe how things look in a particular state: hidden, displayed, active, inactive, disabled etc.
+* Page: rules that only apply to specific sections or pages of the site/application.
+
+Naming convention:
+
+* Base: body, h1, p
+* State: "is-" prefix. ( .is-active , .is-hidden)
+* Module: Modules use the module name (.audio-player)
+* All ids & classes that use multiple words use a hypen. (.audio-player, .user-access)
+
+### Base Rules
+
+Applied directly to selectors. No specific classes or ids. Reset or Normalize are an example of base styles.
+
+```scss
+a {
+	color: blue;
+	text-decoration: dotted;
+	
+	&:hover, 
+	&:focus { color: green; }
+	
+	&:visited { color: gray; }
+}
+```
+
+In addition, these components should also be included in the "base/" directory.
+
+* The responsive grid that applied to all components 
+* Basic color variables. All colors that are used in the site should be included here and should have descriptive names whenever possibe. Example: instead of $green or $purple, use $primary-color, $secondary-color etc.
+
 
 <a name="thanks">Thanks</a>
 ======
