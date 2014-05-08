@@ -13,7 +13,7 @@ Table of Contents
 
 1. [General Principles](#general)
 2. [Formatting](#formatting)
-3. [Structure](#structure)
+3. [Organization](#organizing)
 4. [Thanks](#thanks)
 
 
@@ -193,7 +193,7 @@ h1 {
 }
 ```
 
-<a name="structure">Structure</a>
+<a name="structure">File & Folder Structure</a>
 ======
 
 Style rules are organized into these basic categories:
@@ -211,7 +211,7 @@ Naming convention:
 * Module: Modules use the module name (.audio-player)
 * All ids & classes that use multiple words use a hypen. (.audio-player, .user-access)
 
-### Base Rules
+### Base Rules (/base)
 
 Applied directly to selectors. No specific classes or ids. Reset or Normalize are an example of base styles.
 
@@ -229,8 +229,19 @@ a {
 
 In addition, these components should also be included in the "base/" directory.
 
-* The responsive grid that applied to all components 
-* Basic color variables. All colors that are used in the site should be included here and should have descriptive names whenever possibe. Example: instead of $green or $purple, use $primary-color, $secondary-color etc.
+* /grid.scss: The responsive grid that applied to all components 
+* /colors.scss: Basic color variables. All colors that are used in the site should be included here and should have descriptive names whenever possibe. Example: instead of $green or $purple, use $primary-color, $secondary-color etc.
+* /typography.scss: Includes basic typography
+* /forms.scss: basic layout for forms: labels, inputs, fieldsets, errors, hints etc.
+
+### Modules (/modules)
+
+Modules sit inside layout components or inside other modules. 
+
+* Each module should be designed as a standalone component that can be used on any page in any component. 
+* Can be moved to a different section or page without the layout breaking. They should not be dependant on page structure.
+* Should be easy to customize. Modules will be customized based on requirements on different pages, so should be written with low specificity.
+* Modules generally don't have a width specified, since they are designed to sit within a layout.
 
 
 <a name="thanks">Thanks</a>
