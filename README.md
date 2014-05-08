@@ -36,34 +36,49 @@ The point of having style guidelines is to have a common vocabulary of coding so
 ### Spacing and Indentation:
 * Indentation should be **two spaces**. If using tabs in a code editor, ensure that tabs are set to two spaces. Each selector should have at least one line break above, this helps to separate selectors and ideas. Properties should immediately follow the selector without a line break, which will aide in putting context to the properties. Remove any trailing whitespaces. Trailing whitespaces are unnecessary and can complicate diffs.
 * Opening brace should be on the same line as selector. Closing brace should be on it's own line.
+* If a selector has only one property, keep the selector and property on a single line. This makes it easier to quickly scan a page of SCSS and improves readability.
 
 
 ```scss
 // bad
 h1
 {
-  padding: 0
-  margin: 0
+  padding: 0;
+  margin: 0;
+  font-size: 24px;
+}
+
+h2 { 
+font-size: 18px;
+}
+
+h3 { 
+font-size: 14px;
 }
 
 // good
 h1 {
-  margin: 0
-  padding: 0
+  margin: 0;
+  padding: 0;
+  font-size: 24px;
 }
+
+h2 { font-size: 18px; }
+h3 { font-size: 14px; }
 ```
 
 ### Sorting Properties
 
 * All properties should be on their own line.
-* Related properties should be placed together.
 * List @extend(s) first
 * List @include(s) next
 * List "regular" styles next
+* Classes, pseudo-classes and other modifiers are next.
 * Nested selectors last.
-* Related styles go together.
- Properties should be ordered alphabetically to enable easy lookup. Any includes should go at the top of the propertly list, directly below the selector. Multiple includes should also be ordered alphabetically. 
-
+	* Layout styles first (positioning, width, heigh, margins etc.)
+	* Text styles next (font, line-height)
+	* Other styles last
+* Related properties should be grouped together. 
 
 
 ```scss
@@ -98,14 +113,12 @@ When possible, if multiple methods have the same styles or very similar styles t
 ```scss
 
 ol, ul {
-  padding: 0
-  line-height: 1.5
-  color: #000
+  padding: 0;
+  line-height: 1.5;
+  color: #000;
 }
   
-ul {
-  color: #666
-}
+ul { color: #666; }
 ```
 
 ### Nesting
@@ -142,25 +155,18 @@ body {
 
 
 // good
-body {
-  border-top: 1px solid #000
-}
+body { border-top: 1px solid #000; }
 
 article {
-  background: #ccc
-  padding: 0
+  background: #ccc;
+  padding: 0;
 }
 
 ul {
   margin: 0;
 
-  li {
-    line-height: 1.5em;
-  }
-
-  a {
-    color: #ccc;
-  }
+  li { line-height: 1.5em; }
+  a { color: #ccc; }
 }
 ```
   
@@ -181,13 +187,9 @@ h1:first-child {
 
 // good
 h1 {
-  &:first-child {
-    padding-top: 0
-  }
-  
-  &.green {
-    color: #0085e3
-  }
+  &:first-child { padding-top: 0;  }
+  &.green { color: #0085e3; }
+}
 ```
 
 <a name="thanks">Thanks</a>
@@ -196,5 +198,5 @@ h1 {
 Inspired by:
 
 * [SMACSS](https://smacss.com/)
-* [CSS tricks - SASS Style Guide](http://css-tricks.com/sass-style-guide/)
+* [CSS tricks](http://css-tricks.com/sass-style-guide/)
 * [CSS/Sass style guide](https://github.com/isellsoap/css-sass-style-guide)
