@@ -14,6 +14,10 @@ Table of Contents
 1. [General Principles](#general)
 2. [Formatting](#formatting)
 3. [Organization](#organizing)
+	1. [Base Rules](#organizing-base)
+	2. [Modules](#organizing-modules)
+	3. [States](#organizing-states)
+	4. [Pages](#organizing-pages)
 4. [Thanks](#thanks)
 
 
@@ -27,9 +31,23 @@ Table of Contents
 4. List related properties together
 	( width/height, margin/padding etc.)
 
-**Be consistent.** If you’re editing code, take a few minutes to look at the code around you and determine its style. If they use spaces around all their arithmetic operators, you should too. If their comments have little boxes of hash marks around them, make your comments have little boxes of hash marks around them too.
+###Be consistent.
+
+If you’re editing code, take a few minutes to look at the code around you and determine its style. If they use spaces around all their arithmetic operators, you should too. If their comments have little boxes of hash marks around them, make your comments have little boxes of hash marks around them too.
 
 The point of having style guidelines is to have a common vocabulary of coding so people can concentrate on what you’re saying rather than on how you’re saying it. If code you add to a file looks drastically different from the existing code around it, it throws readers out of their rhythm when they go to read it. Avoid this.
+
+### Use Variables
+
+Convert all colors, common numbers, and numbers with meaning to variables. They are easier to understand and significantly improve readibility.
+
+```scss
+// bad
+.header { background: #b2b8bc; }
+
+// good
+.header { background: $grayblue; }
+```
 
 <a name="formatting">Formatting</a>
 ----------
@@ -193,6 +211,51 @@ h1 {
 }
 ```
 
+### Media Queries
+
+Media Queries should be named and nested whenever possible. 
+
+```scss
+// bad
+
+.content {
+  width: 60%; 
+}
+
+@include screen and (max-width: 800px) {
+  .content { 
+    width: 80%; 
+  }
+}
+
+@include screen and (max-width: 540px) {
+  .content { 
+    width: 100%; 
+  }
+}
+
+
+// good 
+
+.content {
+  width: 60%;
+	
+  @include breakpoint($screen-tablet) {
+    width: 80%;
+  }	
+
+  @include breakpoint($screen-mobile) {
+    width: 100%;
+  }	
+}
+```
+
+### Performance
+
+Do not worry about CSS selector performance or file size. The file will be minified and gzipped for production, so duplicate media queries or selectors will not impact file size. 
+
+CSS selector performance is extremely fast in all modern browsers, so CSS parsing has virtually no impact on page performance. So, focus on clean and readable CSS and *[do not sacrifice semantics or maintainability for efficient CSS.](http://css-tricks.com/efficiently-rendering-css/)* [For most web sites, the possible performance gains from optimizing CSS selectors will be small, and are not worth the costs.](http://www.stevesouders.com/blog/2009/03/10/performance-impact-of-css-selectors/)
+
 <a name="structure">File & Folder Structure</a>
 ======
 
@@ -211,7 +274,7 @@ Naming convention:
 * Module: Modules use the module name (.audio-player)
 * All ids & classes that use multiple words use a hypen. (.audio-player, .user-access)
 
-### Base Rules (/base)
+### <a name="organizing-base">Base Rules (/base)</a>
 
 Applied directly to selectors. No specific classes or ids. Reset or Normalize are an example of base styles.
 
@@ -234,7 +297,7 @@ In addition, these components should also be included in the "base/" directory.
 * /typography.scss: Includes basic typography
 * /forms.scss: basic layout for forms: labels, inputs, fieldsets, errors, hints etc.
 
-### Modules (/modules)
+### <a name="organizing-modules">Modules (/modules)</a>
 
 Modules sit inside layout components or inside other modules. 
 
